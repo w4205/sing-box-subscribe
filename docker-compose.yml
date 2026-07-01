@@ -1,0 +1,10 @@
+services:
+  sing-box-subscribe:
+    image: sing-box-subscribe:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sing-box-subscribe
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
