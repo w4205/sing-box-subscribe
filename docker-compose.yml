@@ -8,3 +8,13 @@ services:
     restart: unless-stopped
     ports:
       - "5000:5000"
+    networks:
+      - default
+      - cloudflare_tunnel
+      - homelab_ingress
+
+networks:
+  cloudflare_tunnel:
+    external: true
+  homelab_ingress:
+    external: true
