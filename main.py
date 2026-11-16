@@ -6,6 +6,7 @@ from collections import OrderedDict
 from api.app import TEMP_DIR
 from parsers.clash2base64 import clash2v2ray
 from gh_proxy_helper import set_gh_proxy
+from outbound_overrides import apply_outbound_overrides
 
 parsers_mod = {}
 providers = None
@@ -424,6 +425,7 @@ def pro_node_template(data_nodes, config_outbound, group):
 
 
 def combin_to_config(config, data):
+    apply_outbound_overrides(config, data)
     config_outbounds = config["outbounds"] if config.get("outbounds") else None
     i = 0
     for group in data:
