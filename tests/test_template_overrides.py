@@ -1,6 +1,7 @@
 import unittest
 
 import main
+import tool
 
 
 class TemplateOverridesTests(unittest.TestCase):
@@ -12,8 +13,8 @@ class TemplateOverridesTests(unittest.TestCase):
                 {'type': 'hysteria2', 'tag_regex': 'RN-',
                  'remove': ['up_mbps', 'down_mbps'],
                  'set': {'tag': 'RN HY2 Direct'}},
-                {'type': 'vless', 'tag_regex': '^RN REALITY$',
-                 'set': {'detour': 'RN REALITY Upstream'}},
+                {'type': 'vless', 'tag_regex': r'(?:^|\s)RN REALITY$',
+                 'set': {'tag': 'RN REALITY', 'detour': 'RN REALITY Upstream'}},
             ],
             'outbounds': [
                 {'type': 'direct', 'tag': 'direct'},
@@ -30,7 +31,7 @@ class TemplateOverridesTests(unittest.TestCase):
         data = {'nodes': [
             {'tag': 'RN-source', 'type': 'hysteria2', 'up_mbps': 10,
              'down_mbps': 100},
-            {'tag': 'RN REALITY', 'type': 'vless'},
+            {'tag': tool.rename('RN REALITY'), 'type': 'vless'},
             {'tag': 'Osaka example', 'type': 'shadowsocks'},
             {'tag': 'Another example', 'type': 'vless'},
         ]}
